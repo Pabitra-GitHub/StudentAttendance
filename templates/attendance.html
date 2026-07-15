@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h3>🎓 Attendance System</h3>
+        <div>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/students">Students</a>
+            <a href="/attendance">Attendance</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h3>Mark Attendance</h3>
+            <form method="POST" style="display: flex; gap: 10px; align-items: flex-end;">
+                <div style="flex: 1;">
+                    <label>Select Student</label>
+                    <select name="student_id" required>
+                        <option value="">-- Choose Student --</option>
+                        {% for student in students %}
+                            <option value="{{ student.id }}">{{ student.roll_number }} - {{ student.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <label>Status</label>
+                    <select name="status" required>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <label>Date</label>
+                    <input type="date" name="date" value="{{ today }}" required>
+                </div>
+                <div>
+                    <button type="submit" style="margin-bottom: 15px;">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Recent Attendance Records</h3>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Roll Number</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.roll_number }}</td>
+                    <td>{{ record.name }}</td>
+                    <td class="{% if record.status == 'Present' %}present{% else %}absent{% endif %}">
+                        {{ record.status }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

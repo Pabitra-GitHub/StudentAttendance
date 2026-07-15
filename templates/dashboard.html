@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h3>🎓 Attendance System</h3>
+        <div>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/students">Students</a>
+            <a href="/attendance">Attendance</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="text-align: center; padding: 3rem;">
+            <h1>Welcome, Admin!</h1>
+            <p>Manage your students and attendance effectively.</p>
+            
+            <div style="margin-top: 30px; font-size: 24px;">
+                Total Students Enrolled: <span style="color: var(--primary); font-weight: bold;">{{ student_count }}</span>
+            </div>
+            
+            <br><br>
+            <a href="/students"><button>Manage Students</button></a>
+            <a href="/attendance"><button style="background-color: #2b2d42;">Manage Attendance</button></a>
+        </div>
+    </div>
+</body>
+</html>
